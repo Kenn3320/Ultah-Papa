@@ -1,0 +1,1106 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f1eee7" />
+  <title>Untuk Papa — Selamat Ulang Tahun</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap');
+
+    :root {
+      --paper: #f1eee7;
+      --paper-light: #f8f6f1;
+      --ink: #27302c;
+      --ink-soft: #68716b;
+      --ink-faint: #9ba098;
+      --line: #d2cec4;
+      --accent: #a85f48;
+      --accent-soft: #eadbd3;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-width: 320px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Manrope', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    .mono {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .site-frame {
+      width: min(1180px, calc(100% - 48px));
+      min-height: 100vh;
+      margin: auto;
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+    }
+
+    .masthead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 32px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .mark {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .mark-text {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .masthead-note {
+      color: var(--ink-faint);
+    }
+
+    .opening {
+      min-height: calc(100vh - 74px);
+      display: grid;
+      place-items: center;
+      padding: 70px 32px 96px;
+      transition:
+        opacity .5s ease,
+        transform .5s ease,
+        visibility .5s;
+    }
+
+    .opening.is-hidden {
+      position: absolute;
+      inset: 74px 0 0;
+      opacity: 0;
+      transform: translateY(-14px);
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .opening-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 470px);
+      align-items: center;
+      gap: clamp(44px, 9vw, 130px);
+      width: min(100%, 920px);
+    }
+
+    .opening-index {
+      align-self: start;
+      padding-top: 8px;
+      color: var(--ink-faint);
+    }
+
+    .opening-index strong {
+      display: block;
+      margin-top: 17px;
+      color: var(--ink);
+      font: 500 clamp(74px, 12vw, 142px)/.8 'Newsreader', Georgia, serif;
+      letter-spacing: -.08em;
+    }
+
+    .opening-index p {
+      max-width: 170px;
+      margin: 22px 0 0;
+      color: var(--ink-soft);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .opening-copy {
+      max-width: 480px;
+    }
+
+    .opening-copy .kicker {
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+
+    .opening-copy h1 {
+      max-width: 470px;
+      margin: 0;
+      font: 500 clamp(55px, 9vw, 100px)/.88 'Newsreader', Georgia, serif;
+      letter-spacing: -.065em;
+    }
+
+    .opening-copy h1 em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .opening-copy p {
+      max-width: 370px;
+      margin: 27px 0 32px;
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .open-letter {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      min-height: 48px;
+      padding: 0 16px 0 18px;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: var(--paper-light);
+      cursor: pointer;
+      transition:
+        transform .22s ease,
+        background .22s ease;
+    }
+
+    .open-letter span:last-child {
+      display: grid;
+      width: 26px;
+      height: 26px;
+      place-items: center;
+      border: 1px solid rgba(248, 246, 241, .45);
+      border-radius: 50%;
+      font-size: 16px;
+    }
+
+    .open-letter:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .opening-foot {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      margin-top: 62px;
+      color: var(--ink-faint);
+    }
+
+    .opening-foot::before {
+      content: '';
+      width: 34px;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .letter-view {
+      display: none;
+      padding: 62px 32px 90px;
+      animation: view-in .65s cubic-bezier(.2, .8, .2, 1) both;
+    }
+
+    .letter-view.is-active {
+      display: block;
+    }
+
+    @keyframes view-in {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .letter-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: min(100%, 920px);
+      margin: 0 auto 45px;
+    }
+
+    .back-link,
+    .music-toggle {
+      min-height: 40px;
+      border: 0;
+      background: transparent;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: color .18s ease;
+    }
+
+    .back-link:hover,
+    .music-toggle:hover {
+      color: var(--accent);
+    }
+
+    .music-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 0;
+    }
+
+    .music-dot {
+      width: 8px;
+      height: 8px;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+    }
+
+    .music-toggle.is-playing .music-dot {
+      background: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+    }
+
+    .letter-grid {
+      display: grid;
+      grid-template-columns: 130px minmax(0, 680px);
+      gap: clamp(28px, 7vw, 100px);
+      width: min(100%, 920px);
+      margin: auto;
+    }
+
+    .letter-aside {
+      padding-top: 10px;
+      color: var(--ink-faint);
+    }
+
+    .letter-aside .rule {
+      width: 42px;
+      height: 1px;
+      margin: 17px 0;
+      background: var(--accent);
+    }
+
+    .letter-aside p {
+      margin: 0;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    .letter-aside strong {
+      display: block;
+      margin-top: 20px;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .letter-sheet {
+      position: relative;
+      padding: clamp(36px, 6vw, 72px) clamp(26px, 7vw, 78px);
+      border: 1px solid var(--line);
+      background: var(--paper-light);
+      color: var(--ink);
+      box-shadow: 10px 12px 0 rgba(210, 206, 196, .45);
+    }
+
+    .letter-sheet::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--accent);
+    }
+
+    .letter-date {
+      color: var(--accent);
+    }
+
+    .letter-sheet h2 {
+      max-width: 520px;
+      margin: 19px 0 0;
+      color: var(--ink);
+      font: 500 clamp(48px, 8vw, 86px)/.88 'Newsreader', Georgia, serif;
+      letter-spacing: -.07em;
+    }
+
+    .letter-front-message {
+      margin: 30px 0 0;
+      padding: 17px 0 0 17px;
+      border-left: 1px solid var(--accent);
+      color: var(--ink);
+      font: 500 18px/1.5 'Newsreader', Georgia, serif;
+    }
+
+    .letter-lead {
+      margin: 35px 0 0;
+      padding-top: 25px;
+      border-top: 1px solid var(--line);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .letter-body {
+      max-width: 520px;
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .letter-body p {
+      margin: 23px 0 0;
+    }
+
+    .letter-closing {
+      margin-top: 43px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+
+    .letter-closing strong {
+      display: block;
+      margin-top: 15px;
+      color: var(--ink);
+      font: 500 30px/1.1 'Newsreader', Georgia, serif;
+    }
+
+    .signature {
+      margin-top: 33px;
+      color: var(--ink-faint);
+      font-size: 12px;
+    }
+
+    .signature strong {
+      display: block;
+      margin-top: 5px;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .reveal-block {
+      opacity: 0;
+      transform: translateY(12px);
+      transition:
+        opacity .65s ease,
+        transform .65s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .letter-date.reveal-block,
+    .letter-sheet h2.reveal-block {
+      opacity: 1;
+      transform: none;
+    }
+
+    .letter-sheet:not(.is-revealed)
+      .letter-lead.reveal-block,
+    .letter-sheet:not(.is-revealed)
+      .letter-body .reveal-block,
+    .letter-sheet:not(.is-revealed)
+      .letter-closing.reveal-block {
+      max-height: 0;
+      margin-top: 0;
+      padding-top: 0;
+      border-top-color: transparent;
+      opacity: 0;
+      transform: translateY(8px);
+      overflow: hidden;
+    }
+
+    .letter-sheet.is-revealed
+      .letter-lead.reveal-block,
+    .letter-sheet.is-revealed
+      .letter-body .reveal-block,
+    .letter-sheet.is-revealed
+      .letter-closing.reveal-block {
+      max-height: 420px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .letter-lead.reveal-block,
+    .letter-body .reveal-block,
+    .letter-closing.reveal-block {
+      transition:
+        max-height .7s ease,
+        opacity .65s ease,
+        transform .65s cubic-bezier(.2, .8, .2, 1),
+        margin-top .7s ease,
+        padding-top .7s ease;
+    }
+
+    .reveal-control,
+    .message-button {
+      margin-top: 31px;
+      padding: 0 0 5px;
+      border: 0;
+      border-bottom: 1px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 12px;
+      transition: color .18s ease, border-color .18s ease;
+    }
+
+    .reveal-control:hover,
+    .message-button:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .extra-section {
+      margin-top: 42px;
+      padding-top: 25px;
+      border-top: 1px solid var(--line);
+    }
+
+    .extra-section h3 {
+      margin: 0;
+      color: var(--ink);
+      font: 500 30px/1.1 'Newsreader', Georgia, serif;
+    }
+
+    .extra-section > p {
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .hidden-message {
+      display: none;
+      margin-top: 20px;
+      padding: 17px;
+      border-left: 1px solid var(--accent);
+      background: var(--paper);
+      animation: view-in .45s ease both;
+    }
+
+    .hidden-message.is-visible {
+      display: block;
+    }
+
+    .hidden-message p {
+      margin: 0;
+      color: var(--ink);
+      font: 500 18px/1.6 'Newsreader', Georgia, serif;
+    }
+
+    .card-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .memory-card {
+      min-height: 100px;
+      padding: 13px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .memory-card:hover {
+      background: var(--paper);
+      transform: translateY(-2px);
+    }
+
+    .memory-card small {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--accent);
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+    }
+
+    .memory-card span {
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .card-detail {
+      display: none;
+      margin-top: 17px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      animation: view-in .45s ease both;
+    }
+
+    .card-detail.is-visible {
+      display: block;
+    }
+
+    .card-detail p {
+      margin: 0;
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .wish-box {
+      margin-top: 20px;
+      padding: 18px;
+      border-left: 1px solid var(--accent);
+      background: var(--paper);
+    }
+
+    .wish-box p {
+      margin: 0;
+      color: var(--ink);
+      font: 500 18px/1.6 'Newsreader', Georgia, serif;
+    }
+
+    .final-button {
+      margin-top: 20px;
+    }
+
+    .final-message {
+      display: none;
+      margin-top: 22px;
+      padding: 24px 18px;
+      border: 1px solid var(--line);
+      text-align: center;
+      animation: view-in .55s ease both;
+    }
+
+    .final-message.is-visible {
+      display: block;
+    }
+
+    .final-message h3 {
+      margin: 0 0 12px;
+      color: var(--ink);
+      font: 500 32px/1.1 'Newsreader', Georgia, serif;
+    }
+
+    .final-message p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .letter-footer {
+      width: min(100%, 810px);
+      margin: 32px auto 0;
+      color: var(--ink-faint);
+      text-align: right;
+    }
+
+    @media (max-width: 700px) {
+      .site-frame {
+        width: 100%;
+        border: 0;
+      }
+
+      .masthead {
+        padding: 19px 20px;
+      }
+
+      .masthead-note {
+        display: none;
+      }
+
+      .opening {
+        min-height: calc(100vh - 62px);
+        padding: 54px 20px 70px;
+        align-items: start;
+      }
+
+      .opening-layout {
+        grid-template-columns: 1fr;
+        gap: 42px;
+        padding-top: 12vh;
+      }
+
+      .opening-index {
+        order: 2;
+        display: flex;
+        align-items: baseline;
+        gap: 15px;
+        padding: 0;
+      }
+
+      .opening-index strong {
+        margin: 0;
+        font-size: 74px;
+      }
+
+      .opening-index p {
+        max-width: 190px;
+        margin: 0;
+      }
+
+      .opening-copy h1 {
+        font-size: clamp(55px, 17vw, 82px);
+      }
+
+      .opening-foot {
+        margin-top: 45px;
+      }
+
+      .letter-view {
+        padding: 32px 20px 60px;
+      }
+
+      .letter-toolbar {
+        margin-bottom: 32px;
+      }
+
+      .letter-grid {
+        grid-template-columns: 1fr;
+        gap: 23px;
+      }
+
+      .letter-aside {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 0;
+      }
+
+      .letter-aside .rule {
+        width: 25px;
+        margin: 0;
+      }
+
+      .letter-aside strong {
+        margin: 0;
+      }
+
+      .letter-aside p {
+        display: none;
+      }
+
+      .letter-sheet {
+        padding: 38px 24px 43px 28px;
+        box-shadow: 6px 8px 0 rgba(210, 206, 196, .45);
+      }
+
+      .letter-sheet h2 {
+        font-size: clamp(49px, 17vw, 76px);
+      }
+
+      .letter-lead,
+      .letter-body {
+        font-size: 14px;
+      }
+
+      .letter-front-message {
+        font-size: 18px;
+      }
+
+      .letter-footer {
+        text-align: left;
+      }
+
+      .card-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="site-frame">
+    <header class="masthead">
+      <a class="mark" href="#" aria-label="Kembali ke halaman pembuka">
+        <span class="mark-text">Untuk Papa</span>
+      </a>
+
+      <span class="masthead-note mono">sebuah surat kecil</span>
+    </header>
+
+    <main>
+      <section class="opening" id="opening" aria-labelledby="opening-title">
+        <div class="opening-layout">
+          <div class="opening-index" aria-hidden="true">
+            <span class="mono">Catatan</span>
+            <strong>01</strong>
+            <p>Untuk hari yang sederhana, dan orang yang berarti.</p>
+          </div>
+
+          <div class="opening-copy">
+            <div class="kicker mono">20.09.2026 · untuk Papa</div>
+
+            <h1 id="opening-title">
+              Selamat<br />
+              ulang tahun, <em>Pa.</em>
+            </h1>
+
+            <p>
+              Selamat ulang tahun, Pa. Terima kasih sudah selalu ada.
+            </p>
+
+            <button class="open-letter" id="openLetter" type="button">
+              <span>Buka suratnya</span>
+              <span aria-hidden="true">→</span>
+            </button>
+
+            <div class="opening-foot mono">
+              dibuat untuk Papa
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="letter-view"
+        id="letterView"
+        aria-labelledby="letter-title"
+        aria-hidden="true"
+      >
+        <div class="letter-toolbar">
+          <button class="back-link" id="backButton" type="button">
+            ← Kembali
+          </button>
+
+          <button
+            class="music-toggle"
+            id="musicButton"
+            type="button"
+            aria-pressed="false"
+          >
+            <span class="music-dot" aria-hidden="true"></span>
+            <span id="musicLabel">Musik mati</span>
+          </button>
+        </div>
+
+        <div class="letter-grid">
+          <aside class="letter-aside">
+            <span class="mono">20 September 2026</span>
+            <span class="rule" aria-hidden="true"></span>
+
+            <p>
+              Untuk Papa,<br />
+              dengan rasa terima kasih.
+            </p>
+
+            <strong>— dari Kenneth</strong>
+          </aside>
+
+          <article class="letter-sheet" id="letterSheet">
+            <div class="letter-date mono reveal-block">
+              UNTUK PAPA
+            </div>
+
+            <h2 id="letter-title" class="reveal-block">
+              Selamat<br />
+              ulang tahun.
+            </h2>
+
+            <p class="letter-front-message">
+              Selamat ulang tahun, Pa.<br />
+              Terima kasih sudah selalu ada.
+            </p>
+
+            <p class="letter-lead reveal-block">
+              Semoga Papa selalu sehat, dimudahkan dalam setiap urusan,
+              dan diberi banyak hal baik di tahun ini.
+            </p>
+
+            <div class="letter-body">
+              <p class="reveal-block">
+                Aku mungkin tidak selalu pandai mengatakannya, tapi aku
+                bersyukur punya Papa.
+              </p>
+
+              <p class="reveal-block">
+                Terima kasih untuk semua usaha, waktu, dan hal-hal yang
+                Papa lakukan selama ini.
+              </p>
+            </div>
+
+            <div class="letter-closing reveal-block">
+              <p class="letter-body">
+                Semoga hari ini menjadi hari yang menyenangkan untuk Papa.
+              </p>
+
+              <strong>Terima kasih, Pa.</strong>
+
+              <div class="signature">
+                Dari anakmu,
+                <strong>Kenneth</strong>
+              </div>
+            </div>
+
+            <button class="reveal-control" id="revealButton" type="button">
+              Buka isi surat
+            </button>
+
+            <section class="extra-section">
+              <h3>Ada satu pesan kecil lagi.</h3>
+
+              <p>
+                Tidak harus dibuka, tapi mungkin Papa ingin membacanya.
+              </p>
+
+              <button class="message-button" id="messageButton" type="button">
+                Buka pesan kecil
+              </button>
+
+              <div class="hidden-message" id="hiddenMessage">
+                <p>
+                  Aku mungkin ga bisa tunjukin, tapi aku bangga sama Papa.
+                  Terima kasih karena sudah jadi inspirasiku untuk terus
+                  belajar dan berkembang.
+                </p>
+              </div>
+            </section>
+
+            <section class="extra-section">
+              <h3>Tiga hal tentang Papa.</h3>
+
+              <p>
+                Pilih salah satu kartu untuk membaca pesannya.
+              </p>
+
+              <div class="card-list">
+                <button class="memory-card" type="button" data-card="1">
+                  <small>01</small>
+                  <span>Kerja keras Papa</span>
+                </button>
+
+                <button class="memory-card" type="button" data-card="2">
+                  <small>02</small>
+                  <span>Untuk keluarga</span>
+                </button>
+
+                <button class="memory-card" type="button" data-card="3">
+                  <small>03</small>
+                  <span>Tentang aku</span>
+                </button>
+              </div>
+
+              <div class="card-detail" id="cardDetail">
+                <p id="cardText"></p>
+              </div>
+            </section>
+
+            <section class="extra-section">
+              <h3>Harapanku untuk Papa.</h3>
+
+              <div class="wish-box">
+                <p>
+                  Semoga Papa selalu sehat, punya waktu untuk beristirahat,
+                  dikelilingi orang-orang yang menyayangi Papa, dan bisa
+                  menikmati lebih banyak hal sederhana yang membuat Papa
+                  bahagia.
+                </p>
+              </div>
+
+              <button
+                class="reveal-control final-button"
+                id="finalButton"
+                type="button"
+              >
+                Buka kejutan terakhir
+              </button>
+
+              <div class="final-message" id="finalMessage">
+                <h3>Selamat ulang tahun, Papa.</h3>
+
+                <p>
+                  Terima kasih atas semua pemberianmu.
+                </p>
+              </div>
+            </section>
+          </article>
+        </div>
+
+        <div class="letter-footer mono">
+          tidak perlu banyak kata
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <audio id="birthdayMusic" loop preload="none">
+    <source src="lagu-favorit-papa.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    const opening = document.getElementById('opening');
+    const letterView = document.getElementById('letterView');
+    const openLetter = document.getElementById('openLetter');
+    const backButton = document.getElementById('backButton');
+    const revealButton = document.getElementById('revealButton');
+
+    const musicButton = document.getElementById('musicButton');
+    const musicLabel = document.getElementById('musicLabel');
+    const birthdayMusic = document.getElementById('birthdayMusic');
+
+    const letterSheet = document.getElementById('letterSheet');
+    const revealBlocks = [
+      ...document.querySelectorAll('.reveal-block')
+    ];
+
+    const mark = document.querySelector('.mark');
+
+    const messageButton = document.getElementById('messageButton');
+    const hiddenMessage = document.getElementById('hiddenMessage');
+
+    const memoryCards = document.querySelectorAll('.memory-card');
+    const cardDetail = document.getElementById('cardDetail');
+    const cardText = document.getElementById('cardText');
+
+    const finalButton = document.getElementById('finalButton');
+    const finalMessage = document.getElementById('finalMessage');
+
+    let musicPlaying = false;
+    let revealed = false;
+
+    const cardMessages = {
+      1: 'Papa adalah orang yang terus berusaha, bahkan ketika keadaan tidak selalu mudah. Aku melihat dan menghargai kerja keras Papa.',
+      2: 'Papa selalu berusaha memberikan yang terbaik untuk keluarga. Mungkin tidak semuanya terlihat, tapi semuanya berarti.',
+      3: 'Aku ingin terus belajar dan berkembang supaya suatu hari nanti aku bisa membuat Papa tersenyum dan merasa bangga.'
+    };
+
+    async function playMusic() {
+      try {
+        await birthdayMusic.play();
+
+        musicPlaying = true;
+        musicButton.classList.add('is-playing');
+        musicButton.setAttribute('aria-pressed', 'true');
+        musicLabel.textContent = 'Musik menyala';
+      } catch (error) {
+        musicLabel.textContent = 'Klik musik untuk memulai';
+      }
+    }
+
+    function showLetter() {
+      opening.classList.add('is-hidden');
+      letterView.classList.add('is-active');
+      letterView.setAttribute('aria-hidden', 'false');
+
+      revealed = false;
+      revealButton.textContent = 'Buka isi surat';
+
+      revealBlocks.forEach((block) => {
+        block.classList.remove('revealed');
+      });
+
+      letterSheet.classList.remove('is-revealed');
+
+      playMusic();
+
+      setTimeout(() => {
+        revealButton.focus();
+      }, 500);
+    }
+
+    function showOpening() {
+      birthdayMusic.pause();
+      birthdayMusic.currentTime = 0;
+
+      musicPlaying = false;
+      musicButton.classList.remove('is-playing');
+      musicButton.setAttribute('aria-pressed', 'false');
+      musicLabel.textContent = 'Musik mati';
+
+      letterView.classList.remove('is-active');
+      letterView.setAttribute('aria-hidden', 'true');
+      opening.classList.remove('is-hidden');
+
+      openLetter.focus();
+    }
+
+    function revealLetter() {
+      revealed = !revealed;
+
+      revealBlocks.forEach((block) => {
+        block.classList.toggle('revealed', revealed);
+      });
+
+      letterSheet.classList.toggle('is-revealed', revealed);
+
+      revealButton.textContent = revealed
+        ? 'Tutup isi surat'
+        : 'Buka isi surat';
+    }
+
+    openLetter.addEventListener('click', showLetter);
+    backButton.addEventListener('click', showOpening);
+    revealButton.addEventListener('click', revealLetter);
+
+    mark.addEventListener('click', (event) => {
+      event.preventDefault();
+      showOpening();
+    });
+
+    musicButton.addEventListener('click', async () => {
+      if (!musicPlaying) {
+        await playMusic();
+      } else {
+        birthdayMusic.pause();
+
+        musicPlaying = false;
+        musicButton.classList.remove('is-playing');
+        musicButton.setAttribute('aria-pressed', 'false');
+        musicLabel.textContent = 'Musik mati';
+      }
+    });
+
+    messageButton.addEventListener('click', () => {
+      const isVisible = hiddenMessage.classList.toggle('is-visible');
+
+      messageButton.textContent = isVisible
+        ? 'Tutup pesan kecil'
+        : 'Buka pesan kecil';
+    });
+
+    memoryCards.forEach((card) => {
+      card.addEventListener('click', () => {
+        const selectedCard = card.dataset.card;
+
+        cardText.textContent = cardMessages[selectedCard];
+        cardDetail.classList.add('is-visible');
+      });
+    });
+
+    finalButton.addEventListener('click', () => {
+      finalMessage.classList.add('is-visible');
+      finalButton.style.display = 'none';
+    });
+
+    birthdayMusic.addEventListener('error', () => {
+      if (!musicPlaying) {
+        musicLabel.textContent = 'Tambahkan file musik';
+      }
+    });
+  </script>
+</body>
+</html>
